@@ -1,0 +1,10 @@
+- Polyglot persistence 
+- Event Driven vs Command Driven
+- Event Driven: Event Notification
+- Event Carried state transfer
+- Event Driven: Event Sourcing
+- CQRS - не пиши туда, где читаешь
+- Gracefull degradation:
+  - Null object pattern 
+  - Circuit breaker (каскадные timeout)
+  - Health check
