@@ -7,4 +7,4 @@
 - Gracefull degradation:
   - Null object pattern 
   - Circuit breaker (каскадные timeout)
-  - Health check
+  - Health check + кэши спереди бэка под нагрузкой
