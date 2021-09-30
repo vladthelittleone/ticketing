@@ -29,3 +29,31 @@ JWT или Cookie?
 1. Энкриптинг куксов меж языками достаточно сложная задача
 2. Поэтому мы не будет их энкриптить
 3. Ведь jwt делает это за нас
+
+https://jwt.io/ - щупаем jwt
+
+JWT состоит из payload и signing key (ключ, который должен быть доступен всем сервисам)
+
+НЕ ХРАНИТЕ ЭТОТ КЛЮЧ В КОДЕ!
+
+Как это сделать?
+
+В кубере есть Secrets!
+Чтоб его задать используем:
+
+`kubectl create secret generic jwt-secret --from-literal=JWT_KEY=your_key`
+
+Теперь в конфигах yml мы можем обратиться к этом секрету.
+
+`
+   spec:
+      containers:
+          - name: auth
+            image: ghc.io/auth
+            env: 
+              - name: JWT_KEY # имя в env данного контейнера
+                valueFrom: 
+                  secretKeyRef: 
+                    name: jwt-secret
+                    key: JWT_KEY
+`
