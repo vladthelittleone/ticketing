@@ -80,7 +80,5 @@ nats.connect('ticketing', 'тут уникальный id', { url: 'http://local
 Queue group - это группа клиентов в канале, для которых отправка события должна обработаться только одним клиентом из этой группы. 
 Те nats отправит событие только одному клиенту из группы. 
 
-```yaml
-const subscription = stan.subscribe(subject, **queueGroup**)
-```
+const subscription = stan.subscribe(subject, queueGroup)
 
