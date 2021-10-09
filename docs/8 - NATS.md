@@ -57,13 +57,13 @@ nats:
 все данные в nats ходят в виде строки
 
 публикация:
-```yaml
+```js
 stan.publish(subject, message, callback)
 ```
 
 подписка:
 
-```yaml
+```js
 const subscription = stan.subscribe(subject)
 
 subscription.on('message', (msg) => {})
@@ -71,7 +71,7 @@ subscription.on('message', (msg) => {})
 
 у каждого подключившегося клиента есть id.
 
-```yaml
+```js
 nats.connect('ticketing', 'тут уникальный id', { url: 'http://localhost:4222' });
 ```
 
@@ -84,7 +84,7 @@ const subscription = stan.subscribe(subject, **queueGroup**)
 
 ### Что делать, если у нас ошибка? Упала база к примеру?
 
-```yaml
+```js
 const options = stan.subsctiptionOptions().setManualAckMode(true);
 
 const subscription = stan.subscribe(subject, queueGroup, options)
@@ -94,7 +94,7 @@ const subscription = stan.subscribe(subject, queueGroup, options)
 но, если мы задаем setManualAckMode(true), то nats считает, что событие не было кореектно обработано, пока не вызовут метод ack(). 
 nats ждет обычно 30 секунд и если не получает подтверждение (ack), то отправляет событие в другой клиент.
 
-```yaml
+```js
 subscription.on('message', (msg) => {
    msk.ack();
 })
@@ -116,3 +116,26 @@ subscription.on('message', (msg) => {
 если hbf = 2, а hbi = 5, то мы будем жать минимум 5 * 2 в случае неудач
 
 Как нам самим показать, что клиент мертв?
+
+#### Gracefull Shutdown
+
+```js
+// На успешное закрытие клиента, вешаем закрытие процесса
+stan.on('close', () => {
+      process.exit();
+});
+
+//
+
+process.on('SIGINT', () => stan.close());
+process.on('SIGTERM', () => stan.close());
+```
+
+### Concurrency
+
+Каким образом нам сохранить консистентность событий в случае ошибок в одном из сервисов? (из-за ошибок или из-за загрузки сервиса nats может ждать 5-10 секунд поднятия сервиса, а другой ивент уже влетел + что делать если сервис все-такие обработал событие, но через 30 секунд, а натс уже отправил в другой)
+
+Еще раз причины:
+-  из-за ошибки события приходят не последовательно
+-  один из клиентов работает быстрее
+-  nats может думать что клиент мертв, а он жив и обрабатывает событие
