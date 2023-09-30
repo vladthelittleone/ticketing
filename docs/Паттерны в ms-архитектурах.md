@@ -185,6 +185,9 @@ Circuit breaker позволяет уменьшить нагрузку на не
   - Null object pattern
   - [Circuit breaker (каскадные timeout)](https://medium.com/@kirill.sereda/%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%B5%D0%B3%D0%B8%D0%B8-%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B8-%D0%BE%D1%88%D0%B8%D0%B1%D0%BE%D0%BA-circuit-breaker-pattern-650232944e37)
   - Health check + кэши спереди бэка под нагрузкой
-  -- На стороне клиента
-  -- На стороне сервиса
-- 
+    - На стороне клиента
+    - На стороне сервиса
+- Caching and Failover Caching
+- Dynamic Configuration
+- Failover
+- Blue/Green, Canary deploys
