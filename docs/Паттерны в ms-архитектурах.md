@@ -177,7 +177,7 @@ Circuit breaker позволяет уменьшить нагрузку на не
 
 - Polyglot persistence 
 - Event Driven vs Command Driven
-- Event Driven: Event Notification
+- [Event Driven: Event Notification](https://youtu.be/bAhxpqHfP8I?si=5hiCBqjVj-Yz1nyI&t=572)
 - Event Carried state transfer
 - Event Driven: Event Sourcing
 - CQRS - не пиши туда, где читаешь
