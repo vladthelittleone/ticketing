@@ -110,3 +110,5 @@ Deadline propagation помогает предотвратить блокиро�
 - Разные лимиты для разных клиентов
 
 Системы лимитинга: [Token bucket, Leaky bucket, Fixed window, Sliding window](https://cloud.google.com/architecture/rate-limiting-strategies-techniques)
+
+Как его натроить в nginx: [перейти по ссылке](https://docs.nginx.com/nginx/admin-guide/security-controls/controlling-access-proxied-http/).
